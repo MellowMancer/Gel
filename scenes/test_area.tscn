@@ -62,7 +62,7 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_bol6f")
 
-[node name="test_area" type="Node2D"]
+[node name="TestArea" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_qs68p")

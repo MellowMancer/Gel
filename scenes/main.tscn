@@ -75,7 +75,7 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_bol6f")
 
-[node name="main" type="Node2D"]
+[node name="Main" type="Node2D"]
 
 [node name="TitleScreen" parent="." instance=ExtResource("1_86h4c")]
 
@@ -114,3 +114,5 @@ polygon = PackedVector2Array(3.05176e-05, -13.3334, -12.5, 0, -8.33333, 0, 0, -9
 
 [node name="Player" parent="." instance=ExtResource("2_nluko")]
 position = Vector2(523, -333)
+
+[node name="Camera2D" type="Camera2D" parent="."]

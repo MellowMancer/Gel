@@ -73,4 +73,4 @@ func _physics_process(delta):
 	wallcheck.target_position.x = -10.8333 if animation.flip_h else 10.8333
 	wall_collision.position.x = -4.583 if animation.flip_h else 4.583
 	move_and_slide()
-
+	Signals.position_update.emit(position)
