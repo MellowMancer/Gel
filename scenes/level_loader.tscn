@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://068l4iw82elj"]
+
+[ext_resource type="Script" path="res://scripts/level_loader.gd" id="1_hf1l6"]
+
+[node name="LevelLoader" type="Node"]
+script = ExtResource("1_hf1l6")
+
+[node name="LevelHolder" type="Node" parent="."]
+
+[node name="SpawnedEntities" type="Node" parent="."]

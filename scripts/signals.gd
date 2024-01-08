@@ -1,4 +1,4 @@
 extends Node
 
 
-signal position_update(position: Vector2)
+signal change_level(scene)

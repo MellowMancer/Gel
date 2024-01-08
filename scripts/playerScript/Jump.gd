@@ -70,7 +70,9 @@ func physics_update(delta: float) -> void:
 			
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, 5)
-	#player.velocity.y += gel.gravity * delta
+	
+	if Input.is_action_just_released("jump") and player.velocity.y < player.jump_cut_short:
+		player.velocity.y = player.jump_cut_short
 	player.move_and_slide()
 
 func _on_wall_jump_buffer_timer_timeout():

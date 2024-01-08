@@ -67,7 +67,7 @@ func _on_dash_cooldown_timeout():
 
 
 func _on_dash_timer_timeout():
-	player.velocity.x = 420 * cos(angle)
-	player.velocity.y = 400 * sin(angle)
+	player.velocity.x = 370 * cos(angle)
+	player.velocity.y = 350 * sin(angle)
 	player.dashing = false
 	player.dash_cooldown.start()

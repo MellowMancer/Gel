@@ -1,21 +1,23 @@
-[gd_scene load_steps=69 format=3 uid="uid://3ab4nqkuxvnr"]
+[gd_scene load_steps=77 format=3 uid="uid://b7xv2qh40s6h7"]
 
-[ext_resource type="Script" path="res://playerScript/Player.gd" id="1_l58wt"]
+[ext_resource type="Script" path="res://scripts/playerScript/Player.gd" id="1_hbdi7"]
 [ext_resource type="Texture2D" uid="uid://bq8r0j6cfm23x" path="res://assets/Idle Animation.png" id="1_uhudh"]
 [ext_resource type="Texture2D" uid="uid://b2w5bd7mc7kx3" path="res://assets/Dash.png" id="2_5sfns"]
+[ext_resource type="Texture2D" uid="uid://cif06w8yn1ehx" path="res://assets/Attack Animation.png" id="2_sm7od"]
 [ext_resource type="Texture2D" uid="uid://css66es8mf3jx" path="res://assets/Jump Animation.png" id="3_1ncox"]
 [ext_resource type="Texture2D" uid="uid://c8hrm0ol7w1p5" path="res://assets/Run Animation.png" id="3_nqfns"]
 [ext_resource type="Script" path="res://StateMachine.gd" id="4_jurbm"]
 [ext_resource type="Texture2D" uid="uid://dtfl1p3n3try2" path="res://assets/Jump Peak Animation.png" id="4_t6lho"]
-[ext_resource type="Script" path="res://playerScript/Idle.gd" id="5_or84a"]
-[ext_resource type="Script" path="res://playerScript/Run.gd" id="6_p0cgy"]
 [ext_resource type="Texture2D" uid="uid://fh1fb82kto58" path="res://assets/WallSlide.png" id="7_7p844"]
-[ext_resource type="Script" path="res://playerScript/Jump.gd" id="7_icx6y"]
-[ext_resource type="Script" path="res://playerScript/Fall.gd" id="10_i7ufv"]
-[ext_resource type="Script" path="res://playerScript/Wall.gd" id="13_g7s73"]
-[ext_resource type="Script" path="res://playerScript/Dash.gd" id="14_4sfe8"]
-[ext_resource type="Script" path="res://playerScript/Grapple.gd" id="15_86qot"]
-[ext_resource type="Script" path="res://playerScript/Stomp.gd" id="16_yos5i"]
+[ext_resource type="Script" path="res://scripts/playerScript/Idle.gd" id="10_im846"]
+[ext_resource type="Script" path="res://scripts/playerScript/Run.gd" id="11_ndp5l"]
+[ext_resource type="Script" path="res://scripts/playerScript/Jump.gd" id="12_lrufg"]
+[ext_resource type="Script" path="res://scripts/playerScript/Fall.gd" id="13_nhwgb"]
+[ext_resource type="Script" path="res://scripts/playerScript/Wall.gd" id="14_2wneo"]
+[ext_resource type="Script" path="res://scripts/playerScript/Dash.gd" id="15_r1gp0"]
+[ext_resource type="Script" path="res://scripts/playerScript/Grapple.gd" id="16_2lx7u"]
+[ext_resource type="Script" path="res://scripts/playerScript/Stomp.gd" id="17_l5tto"]
+[ext_resource type="Texture2D" uid="uid://dwavb7baba43r" path="res://assets/Tileset.png" id="18_qj7qd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d40rg"]
 radius = 7.5
@@ -25,6 +27,26 @@ size = Vector2(10.833, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abudc"]
 size = Vector2(16.6667, 10.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhej5"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(0, 0, 1536, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb8ax"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(1536, 0, 1536, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21c5y"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(0, 512, 1536, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igc8f"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(1536, 512, 1536, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6avy"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(0, 1024, 1536, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wry6a"]
 atlas = ExtResource("2_5sfns")
@@ -222,6 +244,26 @@ region = Rect2(1024, 1024, 512, 512)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fhej5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb8ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21c5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igc8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6avy")
+}],
+"loop": true,
+"name": &"air_attack",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wry6a")
 }, {
 "duration": 1.0,
@@ -398,11 +440,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_q66b0"]
+colors = PackedColorArray(0.8, 0.0784314, 1, 0.501961, 1, 1, 1, 0)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(1.2, 1.2)
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_l58wt")
+script = ExtResource("1_hbdi7")
 
 [node name="JumpCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -427,38 +472,39 @@ target_position = Vector2(175, 0)
 target_position = Vector2(10.8333, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1.90735e-06)
 scale = Vector2(0.0390625, 0.0388672)
 sprite_frames = SubResource("SpriteFrames_jxllc")
-animation = &"dash"
-frame_progress = 0.621421
+animation = &"air_attack"
+frame_progress = 0.158172
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_jurbm")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("5_or84a")
+script = ExtResource("10_im846")
 
 [node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource("6_p0cgy")
+script = ExtResource("11_ndp5l")
 
 [node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource("7_icx6y")
+script = ExtResource("12_lrufg")
 
 [node name="Fall" type="Node" parent="StateMachine"]
-script = ExtResource("10_i7ufv")
+script = ExtResource("13_nhwgb")
 
 [node name="Wall" type="Node" parent="StateMachine"]
-script = ExtResource("13_g7s73")
+script = ExtResource("14_2wneo")
 
 [node name="Dash" type="Node" parent="StateMachine"]
-script = ExtResource("14_4sfe8")
+script = ExtResource("15_r1gp0")
 
 [node name="Grapple" type="Node" parent="StateMachine"]
-script = ExtResource("15_86qot")
+script = ExtResource("16_2lx7u")
 
 [node name="Stomp" type="Node" parent="StateMachine"]
-script = ExtResource("16_yos5i")
+script = ExtResource("17_l5tto")
 
 [node name="WallJumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -481,10 +527,26 @@ wait_time = 0.12
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -50)
 zoom = Vector2(1.5, 1.5)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 20
+lifetime = 0.15
+fract_delta = false
+draw_order = 1
+texture = ExtResource("18_qj7qd")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.05
+scale_amount_max = 0.07
+color_ramp = SubResource("Gradient_q66b0")
 
 [connection signal="timeout" from="WallJumpBufferTimer" to="StateMachine/Jump" method="_on_wall_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="StateMachine/Run" method="_on_coyote_timer_timeout"]

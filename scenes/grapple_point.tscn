@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://smyl32nh54pg"]
+
+[node name="GrapplePoint" type="StaticBody2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0.33337, -0.666599)
+color = Color(0.678431, 0.301961, 0.431373, 1)
+polygon = PackedVector2Array(3.05176e-05, -13.3334, -13.3333, -3.05176e-05, -9.16664, -3.05176e-05, 3.05176e-05, -9.1667)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(0.333401, -1.49996)
+rotation = -3.14159
+color = Color(0.678431, 0.301961, 0.431373, 1)
+polygon = PackedVector2Array(3.05176e-05, -13.3334, -13.3333, -0.833328, -9.16667, -0.833332, 0, -9.16666)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+position = Vector2(0.333408, -0.66663)
+rotation = 1.5708
+color = Color(0.611765, 0.168627, 0.313726, 1)
+polygon = PackedVector2Array(3.05176e-05, -13.3334, -13.3333, 1.14441e-05, -9.16667, 7.62939e-06, 0, -9.16666)
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+position = Vector2(0.333401, -0.66663)
+rotation = -1.5708
+color = Color(0.611765, 0.168627, 0.313726, 1)
+polygon = PackedVector2Array(3.05176e-05, -13.3334, -12.5, 0, -8.33333, 0, 0, -9.16667)

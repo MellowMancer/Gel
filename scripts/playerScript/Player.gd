@@ -5,6 +5,7 @@ const speed = 100.0
 const jump_velocity = -400.0
 const double_jump_velocity = -300
 const terminal_velocity = 700
+const jump_cut_short = -120
 
 var animation
 var main_collision
@@ -51,7 +52,6 @@ func _ready():
 	dash_timer = $DashTimer
 	stomp_timer = $StompTimer
 	grapplepoint = get_parent().get_node("GrapplePoint")
-	#grapplepoint = $GrapplePoint
 	ray = $GrappleRay
 	
 func _physics_process(delta):
@@ -73,4 +73,4 @@ func _physics_process(delta):
 	wallcheck.target_position.x = -10.8333 if animation.flip_h else 10.8333
 	wall_collision.position.x = -4.583 if animation.flip_h else 4.583
 	move_and_slide()
-	Signals.position_update.emit(position)
+	#Signals.position_update.emit(position)
