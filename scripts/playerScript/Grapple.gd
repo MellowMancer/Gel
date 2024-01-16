@@ -18,6 +18,11 @@ func enter(_msg := {}) -> void:
 	player.jump_peak_collision.disabled = false
 	player.wall_collision.disabled = true
 	
+	player.main_hurtbox.disabled = true
+	player.jump_hurtbox.disabled = true
+	player.jump_peak_hurtbox.disabled = false
+	player.wall_hurtbox.disabled = true
+	
 	if Input.is_action_just_pressed("grapple"):
 		if player.ray.is_colliding():
 			player.grapplepoint.global_position = player.ray.get_collision_point()

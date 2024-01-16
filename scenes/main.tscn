@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://qsbucofk5ki0"]
+[gd_scene load_steps=7 format=3 uid="uid://qsbucofk5ki0"]
 
+[ext_resource type="PackedScene" uid="uid://w2dd64krxyg" path="res://scenes/enemies/crawler.tscn" id="2_apc28"]
 [ext_resource type="PackedScene" uid="uid://b7xv2qh40s6h7" path="res://scenes/gel.tscn" id="2_nluko"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ap7a"]
@@ -124,3 +125,6 @@ shape = SubResource("RectangleShape2D_kg8vi")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(442, -308, 608, -220, 591, -187, 425, -276)
+
+[node name="Crawler" parent="." instance=ExtResource("2_apc28")]
+position = Vector2(760, -205)

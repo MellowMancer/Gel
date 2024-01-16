@@ -20,7 +20,6 @@ func change_level(scene):
 		var player = player_preload.instantiate()
 		var grapple = grapple_preload.instantiate()
 		
-#		player.grapplepoint = grapple
 		
 		$SpawnedEntities.call_deferred("add_child", grapple)
 		$SpawnedEntities.call_deferred("add_child", player)

@@ -13,6 +13,13 @@ var jump_collision
 var jump_peak_collision
 var wall_collision
 
+var main_hurtbox
+var jump_hurtbox
+var jump_peak_hurtbox
+var wall_hurtbox
+
+var hit_box
+
 var ray
 var grapplepoint
 var global_mouse_position
@@ -28,6 +35,7 @@ var wallcheck
 #var raycast
 #var ledgecheck
 var can_double_jump = true
+var can_attack = true
 var can_dash = true
 var wall_jump_buffer = false
 var coyote_flag = false
@@ -44,6 +52,14 @@ func _ready():
 	jump_peak_collision = $JumpPeakCollision
 	wall_collision = $WallCollision
 	
+	main_hurtbox = $HurtBox/MainHurtBox
+	jump_hurtbox = $HurtBox/JumpHurtBox
+	jump_peak_hurtbox = $HurtBox/JumpPeakHurtBox
+	wall_hurtbox = $HurtBox/WallHurtBox
+	
+	hit_box = $HitBox/HitBox
+	hit_box.disabled = true
+	
 	wallcheck = $WallCheck
 	
 	coyote_timer = $CoyoteTimer
@@ -52,6 +68,7 @@ func _ready():
 	dash_timer = $DashTimer
 	stomp_timer = $StompTimer
 	grapplepoint = get_parent().get_node("GrapplePoint")
+	grapplepoint.visible = false
 	ray = $GrappleRay
 	
 func _physics_process(delta):
@@ -72,5 +89,7 @@ func _physics_process(delta):
 	animation.flip_h = direction < 0 if !dashing else false
 	wallcheck.target_position.x = -10.8333 if animation.flip_h else 10.8333
 	wall_collision.position.x = -4.583 if animation.flip_h else 4.583
+	wall_hurtbox.position.x = -5 if animation.flip_h else 5
+	hit_box.position.x =  -17.5 if animation.flip_h else 17.5
 	move_and_slide()
 	#Signals.position_update.emit(position)

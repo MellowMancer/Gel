@@ -1,9 +1,11 @@
-[gd_scene load_steps=77 format=3 uid="uid://b7xv2qh40s6h7"]
+[gd_scene load_steps=84 format=3 uid="uid://b7xv2qh40s6h7"]
 
 [ext_resource type="Script" path="res://scripts/playerScript/Player.gd" id="1_hbdi7"]
 [ext_resource type="Texture2D" uid="uid://bq8r0j6cfm23x" path="res://assets/Idle Animation.png" id="1_uhudh"]
 [ext_resource type="Texture2D" uid="uid://b2w5bd7mc7kx3" path="res://assets/Dash.png" id="2_5sfns"]
+[ext_resource type="Script" path="res://scripts/playerScript/PlayerHitBox.gd" id="2_rvppt"]
 [ext_resource type="Texture2D" uid="uid://cif06w8yn1ehx" path="res://assets/Attack Animation.png" id="2_sm7od"]
+[ext_resource type="Script" path="res://scripts/playerScript/HurtBox.gd" id="2_w4qk3"]
 [ext_resource type="Texture2D" uid="uid://css66es8mf3jx" path="res://assets/Jump Animation.png" id="3_1ncox"]
 [ext_resource type="Texture2D" uid="uid://c8hrm0ol7w1p5" path="res://assets/Run Animation.png" id="3_nqfns"]
 [ext_resource type="Script" path="res://StateMachine.gd" id="4_jurbm"]
@@ -19,6 +21,24 @@
 [ext_resource type="Script" path="res://scripts/playerScript/Stomp.gd" id="17_l5tto"]
 [ext_resource type="Texture2D" uid="uid://dwavb7baba43r" path="res://assets/Tileset.png" id="18_qj7qd"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s46mj"]
+radius = 5.0
+height = 16.6667
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ffi6e"]
+radius = 5.0
+height = 16.6667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8jdx"]
+radius = 7.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_212nl"]
+radius = 6.66667
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rigob"]
+radius = 7.5
+height = 25.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_d40rg"]
 radius = 7.5
 
@@ -32,13 +52,13 @@ size = Vector2(16.6667, 10.5)
 atlas = ExtResource("2_sm7od")
 region = Rect2(0, 0, 1536, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xb8ax"]
-atlas = ExtResource("2_sm7od")
-region = Rect2(1536, 0, 1536, 512)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_21c5y"]
 atlas = ExtResource("2_sm7od")
 region = Rect2(0, 512, 1536, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb8ax"]
+atlas = ExtResource("2_sm7od")
+region = Rect2(1536, 0, 1536, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igc8f"]
 atlas = ExtResource("2_sm7od")
@@ -247,10 +267,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_fhej5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xb8ax")
+"texture": SubResource("AtlasTexture_21c5y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_21c5y")
+"texture": SubResource("AtlasTexture_xb8ax")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_igc8f")
@@ -445,23 +465,58 @@ colors = PackedColorArray(0.8, 0.0784314, 1, 0.501961, 1, 1, 1, 0)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(1.2, 1.2)
-collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_hbdi7")
 
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("2_w4qk3")
+
+[node name="WallHurtBox" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+position = Vector2(-5, 0.833333)
+shape = SubResource("CapsuleShape2D_s46mj")
+
+[node name="MainHurtBox" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ffi6e")
+
+[node name="JumpPeakHurtBox" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+position = Vector2(0, -1.66667)
+shape = SubResource("CircleShape2D_v8jdx")
+
+[node name="JumpHurtBox" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+shape = SubResource("CircleShape2D_212nl")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_rvppt")
+
+[node name="HitBox" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(17.5, 0.833333)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rigob")
+
 [node name="JumpCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_d40rg")
 
 [node name="JumpPeakCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_d40rg")
 
 [node name="WallCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(4.58333, 0.916666)
 shape = SubResource("RectangleShape2D_dj7uq")
 
 [node name="MainCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4.41667)
 shape = SubResource("RectangleShape2D_abudc")
 
@@ -476,7 +531,7 @@ position = Vector2(0, 1.90735e-06)
 scale = Vector2(0.0390625, 0.0388672)
 sprite_frames = SubResource("SpriteFrames_jxllc")
 animation = &"air_attack"
-frame_progress = 0.158172
+frame_progress = 0.897381
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_jurbm")
@@ -528,7 +583,7 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -50)
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2.2, 2.2)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
