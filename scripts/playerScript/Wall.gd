@@ -16,7 +16,7 @@ func enter(_msg := {}) -> void:
 	player.wall_hurtbox.disabled = false
 	
 	player.wall_jump_buffer = false
-	player.can_attack = true
+	player.can_attack = false
 
 func exit() -> void:
 	# Code to execute when exiting the idle state

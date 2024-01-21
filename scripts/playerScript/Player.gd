@@ -19,6 +19,7 @@ var jump_peak_hurtbox
 var wall_hurtbox
 
 var hit_box
+var health_component
 
 var ray
 var grapplepoint
@@ -30,6 +31,7 @@ var coyote_timer
 var dash_timer
 var dash_cooldown
 var stomp_timer
+var attack_timer
 
 var wallcheck
 #var raycast
@@ -43,6 +45,7 @@ var dashing
 var direction = 1
 var gravity = 700
 var dir
+var angle = 0
 
 func _ready():
 	animation = $AnimatedSprite2D
@@ -59,6 +62,7 @@ func _ready():
 	
 	hit_box = $HitBox/HitBox
 	hit_box.disabled = true
+	health_component = $PlayerHealthComponent
 	
 	wallcheck = $WallCheck
 	
@@ -67,6 +71,7 @@ func _ready():
 	dash_cooldown = $DashCooldown
 	dash_timer = $DashTimer
 	stomp_timer = $StompTimer
+	attack_timer = $AttackTimer
 	grapplepoint = get_parent().get_node("GrapplePoint")
 	grapplepoint.visible = false
 	ray = $GrappleRay
@@ -83,7 +88,6 @@ func _physics_process(delta):
 	elif velocity.y < -terminal_velocity:
 		velocity.y = move_toward(velocity.y, -terminal_velocity, 100)
 	
-		
 	global_mouse_position = get_global_mouse_position()
 	ray.look_at(global_mouse_position)
 	animation.flip_h = direction < 0 if !dashing else false
@@ -93,3 +97,9 @@ func _physics_process(delta):
 	hit_box.position.x =  -17.5 if animation.flip_h else 17.5
 	move_and_slide()
 	#Signals.position_update.emit(position)
+
+func recoil(enemy_hitbox_position):
+	angle = global_position.angle_to_point(enemy_hitbox_position)
+	print(cos(angle))
+	velocity.x = cos(angle) * direction * -150
+	velocity.y = sin(angle) * direction * -150

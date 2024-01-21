@@ -30,6 +30,8 @@ func enter(_msg := {}) -> void:
 			length = (player.global_position).distance_to(player.grapplepoint.global_position)
 			player.grapplepoint.visible = true
 			player.grappling = true
+			
+	player.can_attack = false
 
 
 func exit() -> void:
@@ -59,6 +61,8 @@ func update(delta: float) -> void:
 
 
 func physics_update(delta):
+	if Input.get_axis("move_left", "move_right"):
+		player.direction = Input.get_axis("move_left", "move_right")
 
 	if Input.is_action_pressed("grapple"):
 		player.grapplepoint.global_position = position

@@ -90,6 +90,7 @@ layer_0/tile_data = PackedInt32Array(1114114, 65536, 0, 1114115, 65536, 0, 11141
 visible = false
 z_index = 2
 position = Vector2(55.8333, -33.3333)
+collision_layer = 2
 
 [node name="Polygon2D" type="Polygon2D" parent="GrapplePoint"]
 color = Color(0.678431, 0.301961, 0.431373, 1)
@@ -127,4 +128,4 @@ shape = SubResource("RectangleShape2D_kg8vi")
 polygon = PackedVector2Array(442, -308, 608, -220, 591, -187, 425, -276)
 
 [node name="Crawler" parent="." instance=ExtResource("2_apc28")]
-position = Vector2(760, -205)
+position = Vector2(1347, -207)

@@ -1,4 +1,4 @@
-class_name HurtBox
+class_name PlayerHurtBox
 extends Area2D
 
 @export var health := 5;
@@ -8,13 +8,14 @@ func _on_area_entered(hitbox: HitBox):
 	if hitbox == null:
 		return
 	take_damage(hitbox.damage)
+	owner.recoil(hitbox.global_position)
 
 func take_damage(damage):
 	health -= damage
 	invincibility_timer.start()
 #	for child in find_children("*", "CollisionShape2D"):
 #		child.set_deferred("disabled", true)
-	monitoring = false
+
 	
 	if health <= 0:
 		get_parent().queue_free()
@@ -23,4 +24,4 @@ func take_damage(damage):
 func _on_invincibilty_timer_timeout():
 #	for child in find_children("*", "CollisionShape2D"):
 #		child.set_deferred("disabled", false)
-	monitoring = true
+	set_collision_mask_value(2, true)

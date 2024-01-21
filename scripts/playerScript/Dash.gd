@@ -55,8 +55,9 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	
 	if player.can_dash:
+		player.velocity.x = move_toward(player.velocity.x, 0, 40)
 		player.velocity.y = 20 * sin(angle)
-		player.velocity.x = 80 * cos(angle)
+#		player.velocity.x = 80 * cos(angle)
 		if player.velocity.x > 0:
 			player.direction = 1
 		else:

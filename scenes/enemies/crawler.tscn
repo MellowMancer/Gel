@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://w2dd64krxyg"]
+[gd_scene load_steps=21 format=3 uid="uid://w2dd64krxyg"]
 
 [ext_resource type="Texture2D" uid="uid://dbvmqgm0yk117" path="res://assets/crawler_spritesheet.png" id="1_0k8ap"]
 [ext_resource type="Script" path="res://scripts/enemyScripts/crawler.gd" id="1_j3shg"]
 [ext_resource type="Script" path="res://scripts/playerScript/HurtBox.gd" id="2_bm5r8"]
+[ext_resource type="Script" path="res://scripts/playerScript/PlayerHitBox.gd" id="5_d6kap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwxqq"]
 atlas = ExtResource("1_0k8ap")
@@ -97,18 +98,24 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f7dgy"]
-radius = 42.0
+radius = 40.0
 height = 266.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqwji"]
 radius = 50.0
-height = 280.0
+height = 270.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnjcr"]
+radius = 40.0
+height = 270.0
 
 [node name="Crawler" type="CharacterBody2D"]
 scale = Vector2(0.2, 0.2)
+collision_layer = 4
 script = ExtResource("1_j3shg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 10)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_2xxfp")
 frame_progress = 0.550708
@@ -119,6 +126,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_f7dgy")
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
 script = ExtResource("2_bm5r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -126,4 +136,18 @@ position = Vector2(0, 15)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_xqwji")
 
+[node name="InvincibiltyTimer" type="Timer" parent="HurtBox"]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_d6kap")
+
+[node name="HitBox" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.13687e-13, 20)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vnjcr")
+
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
+[connection signal="timeout" from="HurtBox/InvincibiltyTimer" to="HurtBox" method="_on_invincibilty_timer_timeout"]

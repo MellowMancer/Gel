@@ -39,5 +39,7 @@ func update(delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	# Code to execute every physics frame while in the idle state
-	pass
+	if player.velocity.x > player.speed:
+		player.velocity.x = move_toward(player.velocity.x, player.direction*player.speed, 30)
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, 50)

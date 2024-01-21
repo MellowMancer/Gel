@@ -33,7 +33,7 @@ func update(delta: float) -> void:
 		player.coyote_timer.start()
 		state_machine.transition_to("Fall")
 	
-	elif Input.is_action_just_pressed("jump"):
+	elif Input.is_action_pressed("jump"):
 		state_machine.transition_to("Jump")
 		
 	elif Input.is_action_pressed("dash") and player.can_dash:
