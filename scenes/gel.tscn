@@ -37,8 +37,8 @@ radius = 5.0
 height = 16.6667
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rigob"]
-radius = 9.99999
-height = 36.6667
+radius = 8.33333
+height = 38.3333
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d40rg"]
 radius = 7.5
@@ -508,7 +508,7 @@ monitoring = false
 script = ExtResource("2_rvppt")
 
 [node name="HitBox" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(19.1667, 0.833333)
+position = Vector2(16.6667, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_rigob")
 
